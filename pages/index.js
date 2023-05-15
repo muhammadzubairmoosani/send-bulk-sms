@@ -12,6 +12,7 @@ firebase.initializeApp({
 export default function Home() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [userDataIsLoading, setUserDataIsLoading] = useState(false);
 
   const db = firebase.firestore();
 
@@ -37,6 +38,7 @@ export default function Home() {
   }
 
   function getData() {
+    setUserDataIsLoading(true)
     db.collection("users")
       .get()
       .then((querySnapshot) => {
@@ -46,9 +48,11 @@ export default function Home() {
           dataArray.push(data);
         });
         setUsers(dataArray);
+        setUserDataIsLoading(false)
       })
       .catch((error) => {
         console.error("Error getting document:", error);
+        setUserDataIsLoading(false)
       });
   }
 
@@ -58,6 +62,9 @@ export default function Home() {
 
   return (
     <>
+    <div>
+      <h3> <span style={{color: 'red'}}>Note</span>: Created with Next.js API, Firestore DB, and Vonage SMS Service, it's send sms only one number which i have been registered, because using free-tier account.</h3>
+    </div>
       <table>
         <thead>
           <tr>
@@ -70,7 +77,7 @@ export default function Home() {
         </thead>
 
         <tbody>
-          {users.map((user, index) => (
+          {userDataIsLoading ? 'User data is loading...' : users.map((user, index) => (
             <tr key={index}>
               <td style={{ border: "1px solid" }}>{index + 1}</td>
               <td style={{ border: "1px solid" }}>{user.username}</td>
@@ -92,7 +99,7 @@ export default function Home() {
           background: "lightGreen",
         }}
       >
-        {loading ? 'loading...' : 'Send Message to All Users'}
+        {loading ? 'Loading...' : 'Send Message to All Users'}
       </button>
     </>
   );
