@@ -63,7 +63,7 @@ export default function Home() {
   return (
     <>
     <div>
-      <h3> <span style={{color: 'red'}}>Note</span>: Created with Next.js API, Firestore DB, and Vonage SMS Service, it's send sms only one number which i have been registered, because using free-tier account.</h3>
+      <h3> <span className="font-color">Note</span>: Created with Next.js API, Firestore DB, and the Vonage SMS Service, it sends SMS messages to only one specific number that I have registered due to using a free-tier account.</h3>
     </div>
       <table>
         <thead>
