@@ -5,8 +5,8 @@ export default async function handler(req, res) {
     const data = req.body;
     console.log(data);
     const vonage = new Vonage({
-      apiKey: "383558b9",
-      apiSecret: "8ztUraCHkCqEuN0P",
+      apiKey: "383097ed",
+      apiSecret: "38tg3qhBIAwEoKvN",
     });
 
     const smsPromises = data.map((recipient) => {
